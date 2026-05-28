@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Propuesta Integral · Kristich Desarrollos × Piccolella</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --green-950:#08251B;
+    --green-900:#0C2F23;
+    --green-800:#103D2E;
+    --green-700:#1A4E3C;
+    --green-500:#2E7D5B;
+    --green-300:#79B89B;
+    --cream:#F7EDD7;
+    --cream-soft:#FBF5E7;
+    --paper:#FCF8EE;
+    --blue:#1E2BFF;
+    --blue-600:#1320E0;
+    --blue-300:#9AA1FF;
+    --purple:#6B4E9E;
+    --ink:#0C2F23;
+    --ink-soft:#2C4A3D;
+    --shadow:0 30px 60px -25px rgba(8,37,27,.45);
+    --shadow-blue:0 30px 60px -25px rgba(30,43,255,.40);
+    --maxw:1180px;
+    --ease:cubic-bezier(.16,1,.3,1);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Hanken Grotesk',sans-serif;
+    background:var(--green-900);
+    color:var(--cream);
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+    line-height:1.55;
+  }
+  ::selection{background:var(--green-500);color:#fff}
+  h1,h2,h3,h4{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;line-height:1.02;letter-spacing:-.02em}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+
+  /* grain overlay */
+  body::after{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.04;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* ============ NAV ============ */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:1000;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px 28px;
+    transition:background .4s var(--ease), padding .4s var(--ease), backdrop-filter .4s;
+  }
+  nav.scrolled{background:rgba(8,37,27,.78);backdrop-filter:blur(14px);padding:10px 28px;border-bottom:1px solid rgba(247,237,215,.08)}
+  .brand{font-family:'Bricolage Grotesque';font-weight:800;font-size:1.25rem;letter-spacing:-.03em;display:flex;align-items:center;gap:9px}
+  .brand .dot{width:9px;height:9px;border-radius:50%;background:var(--green-300);box-shadow:0 0 0 4px rgba(121,184,155,.18)}
+  .nav-links{display:flex;gap:8px;align-items:center}
+  .nav-links a{
+    color:var(--cream);text-decoration:none;font-size:.82rem;font-weight:500;
+    padding:8px 14px;border-radius:99px;transition:.25s var(--ease);opacity:.7;white-space:nowrap;
+  }
+  .nav-links a:hover{opacity:1;background:rgba(247,237,215,.08)}
+  .nav-links a.cta{background:var(--cream);color:var(--green-900);opacity:1;font-weight:700}
+  .nav-links a.cta:hover{transform:translateY(-1px);background:#fff}
+  .burger{display:none}
+  @media(max-width:860px){
+    .nav-links{display:none}
+  }
+
+  /* ============ HERO ============ */
+  .hero{
+    position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:center;
+    padding:120px 0 80px;overflow:hidden;
+    background:
+      radial-gradient(120% 80% at 80% -10%, rgba(46,125,91,.55), transparent 55%),
+      radial-gradient(90% 70% at -10% 110%, rgba(30,43,255,.18), transparent 55%),
+      linear-gradient(180deg,var(--green-950),var(--green-900));
+  }
+  .hero-grid{
+    position:absolute;inset:0;opacity:.5;pointer-events:none;
+    background-image:linear-gradient(rgba(247,237,215,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(247,237,215,.05) 1px,transparent 1px);
+    background-size:64px 64px;
+    mask-image:radial-gradient(120% 90% at 70% 20%,#000 30%,transparent 75%);
+  }
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:10px;
+    font-size:.78rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--green-300);margin-bottom:30px;
+    border:1px solid rgba(121,184,155,.3);padding:8px 16px;border-radius:99px;
+    background:rgba(46,125,91,.08);
+  }
+  .eyebrow .pulse{width:7px;height:7px;border-radius:50%;background:var(--green-300);animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(121,184,155,.6)}50%{box-shadow:0 0 0 7px rgba(121,184,155,0)}}
+  .hero h1{
+    font-size:clamp(2.6rem,7vw,5.6rem);max-width:16ch;margin-bottom:28px;
+  }
+  .hero h1 .hl{color:var(--green-300);font-style:italic;font-weight:500}
+  .hero p.lead{font-size:clamp(1.05rem,2vw,1.35rem);max-width:54ch;opacity:.85;margin-bottom:40px;font-weight:400}
+  .hero .services-tags{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:44px}
+  .tag{
+    font-size:.85rem;font-weight:600;padding:9px 18px;border-radius:99px;
+    background:rgba(247,237,215,.07);border:1px solid rgba(247,237,215,.14);
+  }
+  .tag.blue{background:rgba(30,43,255,.16);border-color:rgba(154,161,255,.4);color:#cdd1ff}
+  .hero-actions{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;cursor:pointer;border:none;
+    font-family:'Hanken Grotesk';font-size:.98rem;font-weight:700;
+    padding:16px 28px;border-radius:99px;text-decoration:none;transition:.3s var(--ease);
+  }
+  .btn-primary{background:var(--cream);color:var(--green-900)}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 18px 30px -12px rgba(247,237,215,.4)}
+  .btn-ghost{color:var(--cream);border:1px solid rgba(247,237,215,.25)}
+  .btn-ghost:hover{background:rgba(247,237,215,.08)}
+  .btn .arr{transition:transform .3s var(--ease)}
+  .btn:hover .arr{transform:translateX(4px)}
+  .hero-by{margin-top:54px;display:flex;align-items:center;gap:14px;font-size:.9rem;opacity:.7}
+  .hero-by .line{width:40px;height:1px;background:var(--cream);opacity:.4}
+  .scroll-cue{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;opacity:.5;display:flex;flex-direction:column;align-items:center;gap:8px}
+  .scroll-cue .mouse{width:22px;height:34px;border:1.5px solid var(--cream);border-radius:14px;position:relative}
+  .scroll-cue .mouse::before{content:"";position:absolute;top:6px;left:50%;transform:translateX(-50%);width:3px;height:6px;background:var(--cream);border-radius:2px;animation:scrolldot 1.6s infinite}
+  @keyframes scrolldot{0%{opacity:0;top:6px}40%{opacity:1}80%{opacity:0;top:16px}}
+
+  /* ============ SECTION GENERIC ============ */
+  section{position:relative}
+  .sec-pad{padding:120px 0}
+  .sec-head{margin-bottom:64px;max-width:760px}
+  .sec-tag{font-size:.78rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--green-500);margin-bottom:18px;display:flex;align-items:center;gap:10px}
+  .sec-tag .num{font-family:'Bricolage Grotesque';opacity:.5}
+  .sec-head h2{font-size:clamp(2rem,4.5vw,3.4rem);margin-bottom:18px}
+  .sec-head p{font-size:1.1rem;opacity:.8;font-weight:400}
+
+  /* INTRO / STAT */
+  .intro{background:var(--cream);color:var(--ink)}
+  .intro .sec-tag{color:var(--green-500)}
+  .intro h2{color:var(--green-900)}
+  .stat-row{display:grid;grid-template-columns:.9fr 1.1fr;gap:60px;align-items:center;margin-top:30px}
+  .bignum{font-family:'Bricolage Grotesque';font-weight:800;font-size:clamp(6rem,18vw,13rem);line-height:.85;color:var(--green-800);letter-spacing:-.04em}
+  .bignum .x{color:var(--green-500);font-size:.55em;vertical-align:super}
+  .stat-txt p{font-size:1.25rem;color:var(--ink-soft);max-width:46ch;margin-bottom:20px}
+  .stat-txt p strong{color:var(--green-800)}
+  .quote-strip{background:var(--green-900);color:var(--cream);padding:50px 0}
+  .quote-strip .q{font-family:'Bricolage Grotesque';font-weight:500;font-style:italic;font-size:clamp(1.4rem,3.5vw,2.4rem);max-width:24ch;line-height:1.15}
+  .quote-strip .q b{color:var(--green-300);font-style:normal;font-weight:700}
+
+  /* DESAFIOS */
+  .desafios{background:var(--paper);color:var(--ink)}
+  .desafios .sec-tag{color:var(--green-500)}
+  .desafios h2{color:var(--green-900)}
+  .desafios .sec-head p{color:var(--ink-soft)}
+  .cards-4{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+  .dcard{
+    background:#fff;border:1px solid rgba(12,47,35,.08);border-radius:22px;padding:34px;
+    transition:.4s var(--ease);position:relative;overflow:hidden;
+  }
+  .dcard:hover{transform:translateY(-6px);box-shadow:var(--shadow);border-color:rgba(46,125,91,.3)}
+  .dcard .ic{
+    width:54px;height:54px;border-radius:15px;display:grid;place-items:center;margin-bottom:22px;
+    background:var(--green-800);color:var(--cream);
+  }
+  .dcard:nth-child(2) .ic{background:var(--green-500)}
+  .dcard:nth-child(3) .ic{background:var(--green-700)}
+  .dcard:nth-child(4) .ic{background:var(--green-900)}
+  .dcard h3{font-size:1.3rem;color:var(--green-900);margin-bottom:12px}
+  .dcard p{color:var(--ink-soft);font-size:.98rem}
+  .dcard .bgnum{position:absolute;right:-10px;bottom:-30px;font-family:'Bricolage Grotesque';font-weight:800;font-size:8rem;color:rgba(12,47,35,.04);line-height:1;pointer-events:none}
+
+  /* ANTES / DESPUES */
+  .compare{background:var(--green-900);color:var(--cream)}
+  .toggle-wrap{display:flex;justify-content:center;margin-bottom:50px}
+  .toggle{display:inline-flex;background:rgba(247,237,215,.08);border-radius:99px;padding:5px;position:relative}
+  .toggle button{
+    position:relative;z-index:2;border:none;background:none;cursor:pointer;color:var(--cream);
+    font-family:'Hanken Grotesk';font-weight:700;font-size:.95rem;padding:11px 26px;border-radius:99px;transition:color .3s;opacity:.6;
+  }
+  .toggle button.active{opacity:1}
+  .toggle .slider{position:absolute;top:5px;bottom:5px;left:5px;width:calc(50% - 5px);border-radius:99px;background:var(--green-500);transition:transform .4s var(--ease);z-index:1}
+  .toggle.right .slider{transform:translateX(100%)}
+  .toggle button:first-child.active{color:#fff}
+  .compare-table{max-width:880px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
+  .crow{
+    display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:20px;
+    background:rgba(247,237,215,.04);border:1px solid rgba(247,237,215,.08);border-radius:16px;padding:20px 26px;
+    transition:.4s var(--ease);
+  }
+  .crow:hover{background:rgba(247,237,215,.07)}
+  .crow .before{opacity:.6;text-align:right;font-size:1rem}
+  .crow .before .x{color:#e88;margin-left:8px}
+  .crow .arr-mid{color:var(--green-300);font-size:1.3rem}
+  .crow .after{font-weight:600;font-size:1.05rem;display:flex;align-items:center;gap:10px}
+  .crow .after .chk{width:22px;height:22px;border-radius:50%;background:var(--green-500);color:#fff;display:grid;place-items:center;font-size:.7rem;flex-shrink:0}
+  .compare.show-before .crow .after{display:none}
+  .compare:not(.show-before) .crow .before{display:none}
+  .compare.show-before .crow{grid-template-columns:1fr}
+  .compare:not(.show-before) .crow{grid-template-columns:1fr}
+  .compare.show-before .crow .before{text-align:left;opacity:.85}
+
+  /* PILARES */
+  .pilares{background:var(--cream);color:var(--ink)}
+  .pilares .sec-tag{color:var(--green-500)}
+  .pilares h2{color:var(--green-900)}
+  .pilares .sec-head p{color:var(--ink-soft)}
+  .pillar-tabs{display:flex;gap:12px;margin-bottom:40px;flex-wrap:wrap}
+  .ptab{
+    flex:1;min-width:200px;cursor:pointer;border:1px solid rgba(12,47,35,.12);background:#fff;border-radius:18px;padding:22px 24px;
+    transition:.35s var(--ease);text-align:left;font-family:'Hanken Grotesk';
+  }
+  .ptab .pt-k{font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;opacity:.5;font-weight:700}
+  .ptab .pt-name{font-family:'Bricolage Grotesque';font-weight:800;font-size:1.5rem;color:var(--green-900);margin-top:6px}
+  .ptab.active{background:var(--green-800);border-color:var(--green-800);transform:translateY(-4px);box-shadow:var(--shadow)}
+  .ptab.active .pt-name{color:var(--cream)}
+  .ptab.active .pt-k{color:var(--green-300);opacity:1}
+  .ptab[data-p="bot"].active{background:var(--purple);border-color:var(--purple)}
+  .ptab[data-p="bot"].active .pt-k{color:#d9c9f5}
+  .pillar-panel{
+    background:#fff;border-radius:26px;border:1px solid rgba(12,47,35,.08);overflow:hidden;
+    display:grid;grid-template-columns:1fr 1fr;min-height:380px;box-shadow:var(--shadow);
+  }
+  .pp-left{padding:46px}
+  .pp-left .pp-tag{font-size:.78rem;letter-spacing:.15em;text-transform:uppercase;font-weight:700;color:var(--green-500);margin-bottom:14px}
+  .pp-left h3{font-size:2.2rem;color:var(--green-900);margin-bottom:10px}
+  .pp-left .sub{color:var(--ink-soft);margin-bottom:28px;font-size:1.05rem}
+  .pp-left ul{list-style:none;display:flex;flex-direction:column;gap:16px}
+  .pp-left li{display:flex;gap:14px;align-items:flex-start;font-size:1.02rem;color:var(--ink)}
+  .pp-left li .b{width:26px;height:26px;border-radius:8px;background:var(--green-100,#E4F0EA);color:var(--green-700);display:grid;place-items:center;flex-shrink:0;background:rgba(46,125,91,.14)}
+  .pp-right{background:var(--green-900);position:relative;overflow:hidden;display:grid;place-items:center;padding:30px}
+  .pp-right .mock{width:100%;max-width:340px}
+  .panel-fade{animation:fadeUp .5s var(--ease)}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+  /* mock visuals (svg-ish via divs) */
+  .mock-dash{background:#fff;border-radius:14px;padding:14px;box-shadow:0 20px 40px -20px rgba(0,0,0,.5)}
+  .mock-dash .mrow{display:flex;gap:8px;margin-bottom:8px}
+  .mk{flex:1;background:#F4F7F5;border-radius:9px;padding:10px}
+  .mk .lbl{font-size:.55rem;color:#8aa;text-transform:uppercase;letter-spacing:.05em}
+  .mk .val{font-family:'Bricolage Grotesque';font-weight:800;font-size:1.1rem;color:var(--green-800)}
+  .mk .val.blue{color:var(--blue)}
+  .ring{width:50px;height:50px;border-radius:50%;background:conic-gradient(var(--green-500) 0 78%,#e6ece9 78% 100%);display:grid;place-items:center;margin:6px auto}
+  .ring::after{content:"78%";font-size:.6rem;font-weight:700;color:var(--green-800);background:#fff;width:34px;height:34px;border-radius:50%;display:grid;place-items:center}
+  .bars{display:flex;align-items:flex-end;gap:7px;height:70px;padding:8px}
+  .bars span{flex:1;background:var(--green-500);border-radius:4px 4px 0 0;opacity:.85}
+  /* automation flow mock */
+  .flow-mock{display:flex;flex-direction:column;gap:9px;width:100%;max-width:240px}
+  .fm-node{background:#fff;border-radius:11px;padding:12px 14px;display:flex;align-items:center;gap:10px;font-size:.78rem;color:#234;box-shadow:0 8px 20px -10px rgba(0,0,0,.4)}
+  .fm-node .fi{width:24px;height:24px;border-radius:7px;display:grid;place-items:center;flex-shrink:0;font-size:.7rem;color:#fff}
+  .fm-conn{width:2px;height:14px;background:rgba(247,237,215,.3);margin:0 auto}
+  /* bot mock */
+  .chat-mock{width:100%;max-width:280px;background:#fff;border-radius:16px;padding:16px;box-shadow:0 20px 40px -18px rgba(0,0,0,.5);display:flex;flex-direction:column;gap:10px}
+  .bub{max-width:80%;padding:10px 14px;border-radius:14px;font-size:.82rem;line-height:1.3}
+  .bub.in{background:#EEF0F4;color:#223;border-bottom-left-radius:4px;align-self:flex-start}
+  .bub.out{background:var(--purple);color:#fff;border-bottom-right-radius:4px;align-self:flex-end}
+  .typing{align-self:flex-start;display:flex;gap:4px;padding:10px 14px;background:#EEF0F4;border-radius:14px}
+  .typing i{width:6px;height:6px;border-radius:50%;background:#9aa;animation:typing 1.2s infinite}
+  .typing i:nth-child(2){animation-delay:.2s}.typing i:nth-child(3){animation-delay:.4s}
+  @keyframes typing{0%,60%,100%{transform:translateY(0);opacity:.4}30%{transform:translateY(-4px);opacity:1}}
+
+  /* FLUJO */
+  .flujo{background:var(--green-950);color:var(--cream);position:relative;overflow:hidden}
+  .flujo .dotgrid{position:absolute;inset:0;background-image:radial-gradient(rgba(121,184,155,.18) 1.2px,transparent 1.2px);background-size:26px 26px;opacity:.5;mask-image:radial-gradient(80% 80% at 50% 40%,#000,transparent)}
+  .steps{display:grid;grid-template-columns:repeat(5,1fr);gap:0;position:relative;margin-top:30px}
+  .step{position:relative;padding:0 16px;cursor:default}
+  .step .snum{
+    width:54px;height:54px;border-radius:50%;background:var(--green-800);border:2px solid var(--green-500);
+    display:grid;place-items:center;font-family:'Bricolage Grotesque';font-weight:800;font-size:1.3rem;color:var(--green-300);
+    margin-bottom:24px;transition:.4s var(--ease);position:relative;z-index:2;
+  }
+  .step:hover .snum{background:var(--green-500);color:#fff;transform:scale(1.1)}
+  .step::before{content:"";position:absolute;top:27px;left:50%;width:100%;height:2px;background:linear-gradient(90deg,var(--green-500),rgba(46,125,91,.2));z-index:1}
+  .step:last-child::before{display:none}
+  .step h4{font-size:1.05rem;margin-bottom:10px;color:var(--cream)}
+  .step p{font-size:.9rem;opacity:.7}
+  @media(max-width:860px){.steps{grid-template-columns:1fr;gap:30px}.step::before{display:none}}
+
+  /* ===== ACT II PAID MEDIA ===== */
+  .act-divider{background:linear-gradient(180deg,var(--green-950),var(--blue));padding:90px 0;text-align:center;position:relative;overflow:hidden}
+  .act-divider .big-label{font-family:'Bricolage Grotesque';font-weight:800;font-size:clamp(2.4rem,7vw,5rem);color:rgba(255,255,255,.96);letter-spacing:-.03em}
+  .act-divider .sub{color:rgba(255,255,255,.8);max-width:48ch;margin:18px auto 0;font-size:1.1rem}
+  .act-divider .actno{font-size:.8rem;letter-spacing:.25em;text-transform:uppercase;color:var(--blue-300);margin-bottom:16px;font-weight:700}
+
+  .paid{background:var(--blue);color:#fff;position:relative;overflow:hidden}
+  .paid .blob{position:absolute;border-radius:50%;filter:blur(60px);opacity:.5}
+  .paid .blob.b1{width:420px;height:420px;background:#5563ff;top:-120px;right:-100px}
+  .paid .blob.b2{width:360px;height:360px;background:#0b15c0;bottom:-120px;left:-80px}
+  .paid .sec-tag{color:#cdd1ff}
+  .paid h2{color:#fff}
+  .paid .sec-head p{color:rgba(255,255,255,.85)}
+  .platforms{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-bottom:50px;position:relative;z-index:2}
+  .pf{background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.22);border-radius:22px;padding:34px;backdrop-filter:blur(8px);transition:.4s var(--ease)}
+  .pf:hover{transform:translateY(-6px);background:rgba(255,255,255,.16)}
+  .pf .pf-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+  .pf .pf-ic{width:48px;height:48px;border-radius:13px;background:#fff;display:grid;place-items:center;color:var(--blue);font-weight:800}
+  .pf h3{font-size:1.6rem;color:#fff;margin-bottom:8px}
+  .pf .desc{opacity:.85;font-size:.95rem;margin-bottom:22px}
+  .pf .price{font-family:'Bricolage Grotesque';font-weight:800;font-size:2.2rem;color:#fff}
+  .pf .price span{font-size:.9rem;font-weight:500;opacity:.7;font-family:'Hanken Grotesk'}
+  .includes{position:relative;z-index:2;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:24px;padding:40px}
+  .includes h3{font-size:1.4rem;margin-bottom:26px;color:#fff}
+  .inc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .inc{display:flex;gap:13px;align-items:flex-start;font-size:.97rem}
+  .inc .chk{width:24px;height:24px;border-radius:7px;background:#fff;color:var(--blue);display:grid;place-items:center;flex-shrink:0;font-size:.7rem;font-weight:800}
+  .note{margin-top:26px;font-size:.85rem;opacity:.7;max-width:70ch;line-height:1.5}
+
+  /* PRICING / BUILDER */
+  .pricing{background:var(--paper);color:var(--ink)}
+  .pricing .sec-tag{color:var(--green-500)}
+  .pricing h2{color:var(--green-900)}
+  .pricing .sec-head p{color:var(--ink-soft)}
+  .builder{display:grid;grid-template-columns:1.25fr .85fr;gap:30px;align-items:start}
+  .opt-list{display:flex;flex-direction:column;gap:14px}
+  .opt{
+    display:flex;align-items:center;gap:18px;background:#fff;border:1.5px solid rgba(12,47,35,.1);border-radius:18px;
+    padding:22px 24px;cursor:pointer;transition:.3s var(--ease);user-select:none;
+  }
+  .opt:hover{border-color:var(--green-500)}
+  .opt.on{border-color:var(--green-800);background:#fff;box-shadow:var(--shadow)}
+  .opt.on.blue{border-color:var(--blue)}
+  .opt .check{width:26px;height:26px;border-radius:8px;border:2px solid rgba(12,47,35,.25);display:grid;place-items:center;flex-shrink:0;transition:.25s;color:#fff;font-size:.75rem}
+  .opt.on .check{background:var(--green-800);border-color:var(--green-800)}
+  .opt.on.blue .check{background:var(--blue);border-color:var(--blue)}
+  .opt .o-body{flex:1}
+  .opt .o-name{font-family:'Bricolage Grotesque';font-weight:700;font-size:1.12rem;color:var(--green-900);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .opt .o-name .pill{font-size:.6rem;font-family:'Hanken Grotesk';font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:rgba(46,125,91,.16);color:var(--green-700);padding:3px 8px;border-radius:6px}
+  .opt .o-name .pill.blue{background:rgba(30,43,255,.14);color:var(--blue)}
+  .opt .o-desc{font-size:.88rem;color:var(--ink-soft);margin-top:3px}
+  .opt .o-price{font-family:'Bricolage Grotesque';font-weight:800;font-size:1.25rem;color:var(--green-800);white-space:nowrap}
+  .opt.blue .o-price{color:var(--blue)}
+
+  .summary{position:sticky;top:90px;background:var(--green-900);color:var(--cream);border-radius:24px;padding:34px;box-shadow:var(--shadow)}
+  .summary h3{font-size:1.2rem;margin-bottom:6px}
+  .summary .ssub{font-size:.85rem;opacity:.6;margin-bottom:24px}
+  .sum-lines{display:flex;flex-direction:column;gap:11px;margin-bottom:22px;min-height:30px}
+  .sline{display:flex;justify-content:space-between;font-size:.92rem;opacity:.85;animation:fadeUp .3s var(--ease)}
+  .sline.promo{color:var(--green-300);font-weight:600}
+  .sum-empty{opacity:.45;font-size:.9rem;font-style:italic}
+  .sum-divider{height:1px;background:rgba(247,237,215,.15);margin:6px 0 18px}
+  .sum-total{display:flex;justify-content:space-between;align-items:flex-end}
+  .sum-total .tl{font-size:.85rem;opacity:.7;text-transform:uppercase;letter-spacing:.1em}
+  .sum-total .tv{font-family:'Bricolage Grotesque';font-weight:800;font-size:2.4rem;color:var(--cream);line-height:1}
+  .sum-total .tv small{font-size:.85rem;opacity:.6;font-family:'Hanken Grotesk';font-weight:500}
+  .sum-note{font-size:.78rem;opacity:.55;margin-top:16px;line-height:1.5}
+  .save-badge{margin-top:18px;background:var(--green-500);color:#fff;border-radius:12px;padding:12px 16px;font-size:.85rem;font-weight:600;display:none;align-items:center;gap:10px;animation:fadeUp .4s var(--ease)}
+  .save-badge.show{display:flex}
+
+  /* PLAN */
+  .plan{background:var(--green-900);color:var(--cream);text-align:center}
+  .plan .objtxt{font-family:'Bricolage Grotesque';font-weight:500;font-size:clamp(1.4rem,3.4vw,2.4rem);max-width:24ch;margin:0 auto;line-height:1.2;font-style:italic}
+  .plan .objtxt b{color:var(--green-300);font-style:normal;font-weight:800}
+  .plan .pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:64px;text-align:left}
+  .pblock{border-top:2px solid var(--green-500);padding-top:20px}
+  .pblock h4{font-size:1.15rem;margin-bottom:10px}
+  .pblock p{opacity:.75;font-size:.95rem}
+
+  /* CIERRE */
+  .cierre{background:linear-gradient(180deg,var(--green-900),var(--green-950));text-align:center;padding:130px 0}
+  .cierre h2{font-size:clamp(2.6rem,7vw,5.5rem);margin-bottom:24px}
+  .cierre h2 .it{font-style:italic;font-weight:500;color:var(--green-300)}
+  .cierre p{opacity:.8;font-size:1.15rem;max-width:46ch;margin:0 auto 40px}
+  .signature{margin-top:60px;display:flex;flex-direction:column;align-items:center;gap:6px}
+  .signature .nm{font-family:'Bricolage Grotesque';font-weight:700;font-size:1.4rem}
+  .signature .rl{opacity:.55;font-size:.85rem;letter-spacing:.1em;text-transform:uppercase}
+  footer{padding:30px 0;text-align:center;font-size:.8rem;opacity:.4;background:var(--green-950)}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(34px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+  .reveal.in{opacity:1;transform:none}
+  .reveal.d1{transition-delay:.08s}.reveal.d2{transition-delay:.16s}.reveal.d3{transition-delay:.24s}.reveal.d4{transition-delay:.32s}
+
+  /* progress bar */
+  .progress{position:fixed;top:0;left:0;height:3px;background:var(--green-300);z-index:1001;width:0%}
+
+  @media(max-width:860px){
+    .sec-pad{padding:80px 0}
+    .stat-row{grid-template-columns:1fr;gap:30px}
+    .cards-4{grid-template-columns:1fr}
+    .pillar-panel{grid-template-columns:1fr}
+    .pp-right{min-height:280px}
+    .platforms{grid-template-columns:1fr}
+    .inc-grid{grid-template-columns:1fr}
+    .builder{grid-template-columns:1fr}
+    .summary{position:relative;top:0}
+    .plan .pgrid{grid-template-columns:1fr}
+    .crow{padding:16px}
+  }
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="brand"><span class="dot"></span>Piccolella</div>
+  <div class="nav-links">
+    <a href="#desafios">Desafíos</a>
+    <a href="#pilares">El sistema</a>
+    <a href="#paid">Paid Media</a>
+    <a href="#inversion">Inversión</a>
+    <a href="#contacto" class="cta">Avancemos →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <div class="hero-grid"></div>
+  <div class="wrap">
+    <span class="eyebrow reveal in"><span class="pulse"></span>Propuesta integral · Mayo 2026</span>
+    <h1 class="reveal in d1">Un sistema que <span class="hl">capta, convierte y fideliza</span> — en piloto automático.</h1>
+    <p class="lead reveal in d2">Una propuesta unificada para <strong>Kristich Desarrollos</strong>: la infraestructura digital que ordena tus leads y el motor de adquisición que los hace crecer.</p>
+    <div class="services-tags reveal in d2">
+      <span class="tag">CRM</span>
+      <span class="tag">Bot IA</span>
+      <span class="tag">Automatización</span>
+      <span class="tag blue">Meta Ads</span>
+      <span class="tag blue">Google Ads</span>
+    </div>
+    <div class="hero-actions reveal in d3">
+      <a href="#desafios" class="btn btn-primary">Ver la propuesta <span class="arr">→</span></a>
+      <a href="#inversion" class="btn btn-ghost">Armar mi plan</a>
+    </div>
+    <div class="hero-by reveal in d4"><span class="line"></span>Preparado por Facundo Piccolella</div>
+  </div>
+  <div class="scroll-cue"><span class="mouse"></span>Scroll</div>
+</header>
+
+<!-- INTRO / STAT -->
+<section class="intro sec-pad" id="intro">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-tag"><span class="num">01</span> El contexto</div>
+      <h2>Esto ya no es un lujo tecnológico. Es supervivencia comercial.</h2>
+    </div>
+    <div class="stat-row">
+      <div class="bignum reveal" id="statnum">0<span class="x">×</span></div>
+      <div class="stat-txt reveal d1">
+        <p>La probabilidad de convertir un lead <strong>cae 10 veces</strong> si no lo contactás dentro de los primeros 5 minutos.</p>
+        <p>Tu competencia está a un clic de distancia. Si ellos responden en segundos y vos en horas, el cliente ya compró en otro lado — y sin un CRM, no hay forma de medir qué está pasando.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="quote-strip">
+  <div class="wrap"><div class="q reveal">Nuestro objetivo: optimizar la gestión de leads, potenciar a tu equipo de ventas y <b>maximizar cada oportunidad</b> con flujos de trabajo y bots impulsados por IA.</div></div>
+</div>
+
+<!-- DESAFIOS -->
+<section class="desafios sec-pad" id="desafios">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-tag"><span class="num">02</span> Diagnóstico</div>
+      <h2>Los desafíos que estás enfrentando hoy</h2>
+      <p>Cuatro fugas silenciosas que, juntas, frenan el crecimiento de cualquier negocio.</p>
+    </div>
+    <div class="cards-4">
+      <div class="dcard reveal">
+        <div class="ic">⏱</div>
+        <h3>Respuesta lenta</h3>
+        <p>La atención constante es esencial. Los bots con IA gestionan consultas frecuentes, resuelven problemas y agendan reuniones sin intervención humana — sin perder tiempo en tareas repetitivas.</p>
+        <span class="bgnum">01</span>
+      </div>
+      <div class="dcard reveal d1">
+        <div class="ic">📉</div>
+        <h3>Pérdida de prospectos</h3>
+        <p>Un proceso de ventas sin seguimiento desperdicia grandes oportunidades. Se necesita un pipeline donde las automatizaciones se activen en cada paso y califiquen a los leads de forma eficiente.</p>
+        <span class="bgnum">02</span>
+      </div>
+      <div class="dcard reveal d2">
+        <div class="ic">📊</div>
+        <h3>Falta de datos</h3>
+        <p>Lo que no se mide no se puede mejorar. Sin un CRM no podés ver tu tasa de conversión, qué canales son más rentables o cuánto vale cada lead — información esencial para decidir.</p>
+        <span class="bgnum">03</span>
+      </div>
+      <div class="dcard reveal d3">
+        <div class="ic">🗂</div>
+        <h3>Descentralización</h3>
+        <p>Una base de datos centralizada (no un Excel abandonado): cada contacto que llega por WhatsApp o Instagram ingresa automáticamente al sistema, listo para aprovechar esos datos tan valiosos.</p>
+        <span class="bgnum">04</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ANTES / DESPUES -->
+<section class="compare sec-pad" id="compare">
+  <div class="wrap">
+    <div class="sec-head reveal" style="margin:0 auto 40px;text-align:center">
+      <div class="sec-tag" style="justify-content:center;color:var(--green-300)"><span class="num">03</span> El cambio</div>
+      <h2>De dónde partimos, a dónde llegamos</h2>
+    </div>
+    <div class="toggle-wrap reveal">
+      <div class="toggle right" id="toggle">
+        <span class="slider"></span>
+        <button data-state="before">Hoy (sin sistema)</button>
+        <button data-state="after" class="active">Con CRM + IA</button>
+      </div>
+    </div>
+    <div class="compare-table reveal d1" id="ctable">
+      <div class="crow">
+        <div class="before">Leads perdidos por falta de seguimiento <span class="x">✕</span></div>
+        <div class="arr-mid">→</div>
+        <div class="after"><span class="chk">✓</span> Seguimiento 100% garantizado por el sistema</div>
+      </div>
+      <div class="crow">
+        <div class="before">Caos de información en múltiples canales <span class="x">✕</span></div>
+        <div class="arr-mid">→</div>
+        <div class="after"><span class="chk">✓</span> Centralización total y orden administrativo</div>
+      </div>
+      <div class="crow">
+        <div class="before">Respuesta lenta (horas o días) <span class="x">✕</span></div>
+        <div class="arr-mid">→</div>
+        <div class="after"><span class="chk">✓</span> Respuesta instantánea (segundos)</div>
+      </div>
+      <div class="crow">
+        <div class="before">Servicio post-venta ineficiente <span class="x">✕</span></div>
+        <div class="arr-mid">→</div>
+        <div class="after"><span class="chk">✓</span> Soporte 24/7 para fidelizar clientes</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PILARES -->
+<section class="pilares sec-pad" id="pilares">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-tag"><span class="num">04</span> Los pilares</div>
+      <h2>Tres piezas, un mismo ecosistema</h2>
+      <p>Hacé clic en cada pilar para ver qué hace y cómo se ve en acción.</p>
+    </div>
+
+    <div class="pillar-tabs reveal">
+      <button class="ptab active" data-p="crm"><div class="pt-k">Pilar 01</div><div class="pt-name">CRM</div></button>
+      <button class="ptab" data-p="auto"><div class="pt-k">Pilar 02</div><div class="pt-name">Automation</div></button>
+      <button class="ptab" data-p="bot"><div class="pt-k">Pilar 03</div><div class="pt-name">Bot IA</div></button>
+    </div>
+
+    <div class="pillar-panel reveal d1" id="panel">
+      <!-- filled by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- FLUJO -->
+<section class="flujo sec-pad" id="flujo">
+  <div class="dotgrid"></div>
+  <div class="wrap" style="position:relative;z-index:2">
+    <div class="sec-head reveal" style="text-align:center;margin:0 auto 30px">
+      <div class="sec-tag" style="justify-content:center;color:var(--green-300)"><span class="num">05</span> En la práctica</div>
+      <h2 style="color:var(--cream)">Un flujo, de principio a fin</h2>
+    </div>
+    <div class="steps">
+      <div class="step reveal"><div class="snum">1</div><h4>Completa el formulario</h4><p>El usuario deja sus datos en la web.</p></div>
+      <div class="step reveal d1"><div class="snum">2</div><h4>Ingresa al CRM</h4><p>El lead entra automáticamente, sin carga manual.</p></div>
+      <div class="step reveal d2"><div class="snum">3</div><h4>Bienvenida instantánea</h4><p>Email + mensaje de WhatsApp en segundos.</p></div>
+      <div class="step reveal d3"><div class="snum">4</div><h4>El bot califica</h4><p>Hace las primeras preguntas y transfiere a un humano para cerrar.</p></div>
+      <div class="step reveal d4"><div class="snum">5</div><h4>Seguimiento auto</h4><p>Si no hay respuesta, el sistema vuelve a contactar.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ACT DIVIDER -->
+<section class="act-divider">
+  <div class="wrap reveal">
+    <div class="actno">Acto II — Crecimiento</div>
+    <div class="big-label">Ahora que captás y convertís bien…<br>llenemos el embudo.</div>
+    <p class="sub">Con el sistema funcionando, cada peso invertido en publicidad rinde mucho más. Acá entra el motor de adquisición.</p>
+  </div>
+</section>
+
+<!-- PAID MEDIA -->
+<section class="paid sec-pad" id="paid">
+  <div class="blob b1"></div><div class="blob b2"></div>
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-tag">Paid Media</div>
+      <h2>Campañas que traen clientes, no solo clics</h2>
+      <p>Creación, gestión y optimización continua en las plataformas donde está tu audiencia.</p>
+    </div>
+
+    <div class="platforms">
+      <div class="pf reveal">
+        <div class="pf-top">
+          <div class="pf-ic">f</div>
+          <span class="tag" style="background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.3)">Facebook · Instagram</span>
+        </div>
+        <h3>Meta Ads</h3>
+        <p class="desc">Creación, gestión y optimización de campañas publicitarias en Meta.</p>
+        <div class="price">$150.000 <span>ARS / mes · honorarios</span></div>
+      </div>
+      <div class="pf reveal d1">
+        <div class="pf-top">
+          <div class="pf-ic">G</div>
+          <span class="tag" style="background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.3)">Search · Display</span>
+        </div>
+        <h3>Google Ads</h3>
+        <p class="desc">Creación, gestión y optimización de campañas publicitarias en Google.</p>
+        <div class="price">$230.000 <span>ARS / mes · honorarios</span></div>
+      </div>
+    </div>
+
+    <div class="includes reveal d1">
+      <h3>Qué incluye el servicio Paid Media</h3>
+      <div class="inc-grid">
+        <div class="inc"><span class="chk">✓</span> Acceso a informe en tiempo real</div>
+        <div class="inc"><span class="chk">✓</span> De 1 a 4 campañas por plataforma</div>
+        <div class="inc"><span class="chk">✓</span> Análisis de la competencia</div>
+        <div class="inc"><span class="chk">✓</span> Investigación de palabras clave</div>
+        <div class="inc"><span class="chk">✓</span> Tracking de conversiones (GA4, GTM, pixel de Meta)</div>
+        <div class="inc"><span class="chk">✓</span> Ideas de contenido para la estrategia</div>
+      </div>
+      <p class="note">Ajustamos según la estructura de la cuenta: testeamos campañas de ventas, interacción, clientes potenciales y tráfico, con distintos conjuntos de anuncios y públicos segmentados. <strong>Esto contempla los honorarios del profesional</strong>, no la inversión que realiza el cliente en la plataforma (presupuesto que sugeriremos en base a objetivos).</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING / BUILDER -->
+<section class="pricing sec-pad" id="inversion">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-tag"><span class="num">06</span> Inversión</div>
+      <h2>Armá tu plan</h2>
+      <p>Seleccioná los servicios que quieras y mirá el total mensual al instante. Las promociones se aplican solas.</p>
+    </div>
+
+    <div class="builder">
+      <div class="opt-list reveal">
+        <div class="opt on" data-id="setup" data-price="450000" data-kind="green">
+          <div class="check">✓</div>
+          <div class="o-body">
+            <div class="o-name">Setup del sistema <span class="pill">Etapa 1 · primeros 2 meses</span></div>
+            <div class="o-desc">Auditoría, desarrollo, configuración e implementación del sistema integral (CRM + IA + Automatización).</div>
+          </div>
+          <div class="o-price">$450.000</div>
+        </div>
+
+        <div class="opt" data-id="manten" data-price="150000" data-kind="green">
+          <div class="check">✓</div>
+          <div class="o-body">
+            <div class="o-name">Mantenimiento <span class="pill">Etapa 2 · consolidación</span></div>
+            <div class="o-desc">CRM, optimización, mejoras, reportes y soporte técnico. + costo de tokens del bot según volumen de mensajes.</div>
+          </div>
+          <div class="o-price">$150.000</div>
+        </div>
+
+        <div class="opt blue" data-id="meta" data-price="150000" data-kind="paid">
+          <div class="check">✓</div>
+          <div class="o-body">
+            <div class="o-name">Meta Ads <span class="pill blue">Paid Media</span></div>
+            <div class="o-desc">Creación, gestión y optimización de campañas en Facebook e Instagram.</div>
+          </div>
+          <div class="o-price">$150.000</div>
+        </div>
+
+        <div class="opt blue" data-id="google" data-price="230000" data-kind="paid">
+          <div class="check">✓</div>
+          <div class="o-body">
+            <div class="o-name">Google Ads <span class="pill blue">Paid Media</span></div>
+            <div class="o-desc">Creación, gestión y optimización de campañas en Search y Display.</div>
+          </div>
+          <div class="o-price">$230.000</div>
+        </div>
+      </div>
+
+      <div class="summary reveal d1">
+        <h3>Tu plan mensual</h3>
+        <div class="ssub">Honorarios · ARS por mes</div>
+        <div class="sum-lines" id="sumlines">
+          <div class="sum-empty">Seleccioná al menos un servicio…</div>
+        </div>
+        <div class="sum-divider"></div>
+        <div class="sum-total">
+          <span class="tl">Total mensual</span>
+          <span class="tv" id="total">$0 <small>/mes</small></span>
+        </div>
+        <div class="save-badge" id="savebadge">🎉 <span id="savetext"></span></div>
+        <p class="sum-note">El Setup corresponde a los primeros 2 meses de trabajo. Luego se continúa con el mantenimiento mensual. El consumo de tokens del bot se factura aparte según el volumen real de mensajes.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLAN -->
+<section class="plan sec-pad">
+  <div class="wrap">
+    <div class="objtxt reveal">No vendemos una herramienta. Construimos una <b>relación a largo plazo</b> donde nos involucramos de verdad en tu negocio.</div>
+    <div class="pgrid">
+      <div class="pblock reveal"><h4>Nos involucramos</h4><p>Entendemos a fondo tu situación actual antes de proponer. El sistema se adapta a vos, no al revés.</p></div>
+      <div class="pblock reveal d1"><h4>Mejora continua</h4><p>Buscamos constantemente las mejores alternativas para tu gestión comercial, mes a mes.</p></div>
+      <div class="pblock reveal d2"><h4>Todo conectado</h4><p>Infraestructura (CRM + IA) y crecimiento (Paid Media) trabajando como un solo ecosistema.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CIERRE -->
+<section class="cierre" id="contacto">
+  <div class="wrap reveal">
+    <h2>Hagamos que cada lead <span class="it">cuente</span>.</h2>
+    <p>Estamos listos para auditar tu situación actual y empezar a construir. El próximo cliente que no esperás perder puede estar entrando ahora mismo.</p>
+    <a href="#top" class="btn btn-primary">Avancemos con la propuesta →</a>
+    <div class="signature">
+      <div class="nm">Facundo Piccolella</div>
+      <div class="rl">Kristich Desarrollos · Piccolella</div>
+    </div>
+  </div>
+</section>
+
+<footer>© 2026 · Propuesta preparada por Piccolella para Kristich Desarrollos · Mayo 2026</footer>
+
+<script>
+/* ---------- progress + nav ---------- */
+const nav=document.getElementById('nav'),progress=document.getElementById('progress');
+window.addEventListener('scroll',()=>{
+  nav.classList.toggle('scrolled',window.scrollY>40);
+  const h=document.documentElement.scrollHeight-window.innerHeight;
+  progress.style.width=(window.scrollY/h*100)+'%';
+});
+
+/* ---------- reveal on scroll ---------- */
+const io=new IntersectionObserver((es)=>{
+  es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+},{threshold:.15});
+document.querySelectorAll('.reveal:not(.in)').forEach(el=>io.observe(el));
+
+/* ---------- animated stat number ---------- */
+const statnum=document.getElementById('statnum');
+let counted=false;
+const statIO=new IntersectionObserver((es)=>{
+  es.forEach(e=>{
+    if(e.isIntersecting&&!counted){
+      counted=true;let n=0;const t=setInterval(()=>{n++;statnum.innerHTML=n+'<span class="x">×</span>';if(n>=10)clearInterval(t);},90);
+    }
+  });
+},{threshold:.5});
+statIO.observe(statnum);
+
+/* ---------- antes/despues toggle ---------- */
+const toggle=document.getElementById('toggle'),compare=document.getElementById('compare');
+toggle.querySelectorAll('button').forEach(b=>{
+  b.addEventListener('click',()=>{
+    toggle.querySelectorAll('button').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+    const after=b.dataset.state==='after';
+    toggle.classList.toggle('right',after);
+    compare.classList.toggle('show-before',!after);
+  });
+});
+
+/* ---------- pilares ---------- */
+const pillars={
+  crm:{
+    tag:'Centralización',
+    title:'CRM',
+    sub:'Tu base de datos viva, ordenada y lista para vender.',
+    benefits:['Gestión total del pipeline de ventas','Historial de interacciones por cada cliente','Filtrado avanzado de leads','Dashboard de métricas personalizado'],
+    color:'var(--green-700)',
+    mock:`<div class="mock-dash">
+      <div class="mrow"><div class="mk"><div class="lbl">Oportunidades</div><div class="val">858</div></div><div class="mk"><div class="lbl">Valor pipeline</div><div class="val">$59.6M</div></div></div>
+      <div class="mrow"><div class="mk"><div class="lbl">Conversión</div><div class="ring"></div></div><div class="mk"><div class="lbl">Etapas</div><div class="bars"><span style="height:40%"></span><span style="height:70%"></span><span style="height:55%"></span><span style="height:85%"></span><span style="height:60%"></span></div></div></div>
+    </div>`
+  },
+  auto:{
+    tag:'Eliminar trabajo manual',
+    title:'Automation',
+    sub:'Las tareas repetitivas se ejecutan solas, 24/7.',
+    benefits:['Emails y WhatsApp inmediatos al recibir un lead','Recordatorios de citas automáticos (menos ausentismo)','Nutrición de prospectos a largo plazo sin intervención humana'],
+    color:'var(--green-500)',
+    mock:`<div class="flow-mock">
+      <div class="fm-node"><span class="fi" style="background:#3b82f6">▷</span> Trigger: nuevo lead</div>
+      <div class="fm-conn"></div>
+      <div class="fm-node"><span class="fi" style="background:#8b5cf6">✉</span> Email de bienvenida</div>
+      <div class="fm-conn"></div>
+      <div class="fm-node"><span class="fi" style="background:#22c55e">◔</span> Actualizar oportunidad</div>
+      <div class="fm-conn"></div>
+      <div class="fm-node"><span class="fi" style="background:#f59e0b">⏰</span> Recordatorio 24 hs</div>
+    </div>`
+  },
+  bot:{
+    tag:'Respuesta instantánea y calificación',
+    title:'Bot IA',
+    sub:'Atiende, responde y califica antes de que intervengas.',
+    benefits:['Responde preguntas frecuentes con la base de conocimientos de la empresa','Califica leads: separa curiosos de interesados reales','Agenda reuniones directamente en el calendario del equipo'],
+    color:'var(--purple)',
+    mock:`<div class="chat-mock">
+      <div class="bub in">Hola! Quería info sobre los desarrollos 🏠</div>
+      <div class="bub out">¡Hola! Genial 😊 ¿Buscás para vivienda o inversión?</div>
+      <div class="bub in">Inversión, presupuesto medio</div>
+      <div class="bub out">Perfecto. Tengo 3 opciones ideales. ¿Te agendo una llamada mañana 10hs?</div>
+      <div class="typing"><i></i><i></i><i></i></div>
+    </div>`
+  }
+};
+const panel=document.getElementById('panel');
+function renderPillar(key){
+  const p=pillars[key];
+  panel.innerHTML=`
+    <div class="pp-left panel-fade">
+      <div class="pp-tag">${p.tag}</div>
+      <h3>${p.title}</h3>
+      <div class="sub">${p.sub}</div>
+      <ul>${p.benefits.map(b=>`<li><span class="b">✓</span> ${b}</li>`).join('')}</ul>
+    </div>
+    <div class="pp-right panel-fade">${p.mock}</div>`;
+  if(key==='bot'){panel.querySelector('.pp-right').style.background='#2a1f3d';}
+  else{panel.querySelector('.pp-right').style.background='var(--green-900)';}
+}
+renderPillar('crm');
+document.querySelectorAll('.ptab').forEach(t=>{
+  t.addEventListener('click',()=>{
+    document.querySelectorAll('.ptab').forEach(x=>x.classList.remove('active'));
+    t.classList.add('active');
+    renderPillar(t.dataset.p);
+  });
+});
+
+/* ---------- pricing builder ---------- */
+const opts=document.querySelectorAll('.opt');
+const sumlines=document.getElementById('sumlines'),totalEl=document.getElementById('total');
+const saveBadge=document.getElementById('savebadge'),saveText=document.getElementById('savetext');
+const fmt=n=>'$'+n.toLocaleString('es-AR');
+
+function recalc(){
+  const selected=[...opts].filter(o=>o.classList.contains('on'));
+  let total=0,lines=[],saved=0;
+  const hasMeta=selected.some(o=>o.dataset.id==='meta');
+  const hasGoogle=selected.some(o=>o.dataset.id==='google');
+  const combo=hasMeta&&hasGoogle;
+
+  selected.forEach(o=>{
+    const id=o.dataset.id,price=+o.dataset.price;
+    const name=o.querySelector('.o-name').childNodes[0].textContent.trim();
+    if(combo&&(id==='meta'||id==='google'))return; // handled as combo
+    total+=price;
+    lines.push({name,price});
+  });
+
+  if(combo){
+    const comboPrice=280000;
+    const full=150000+230000;
+    saved=full-comboPrice;
+    total+=comboPrice;
+    lines.push({name:'Combo Meta + Google',price:comboPrice,promo:true});
+  }
+
+  // render
+  if(!selected.length){
+    sumlines.innerHTML='<div class="sum-empty">Seleccioná al menos un servicio…</div>';
+  }else{
+    sumlines.innerHTML=lines.map(l=>`<div class="sline ${l.promo?'promo':''}"><span>${l.promo?'🔥 ':''}${l.name}</span><span>${fmt(l.price)}</span></div>`).join('');
+  }
+  totalEl.innerHTML=fmt(total)+' <small>/mes</small>';
+
+  if(saved>0){saveBadge.classList.add('show');saveText.textContent='Ahorrás '+fmt(saved)+' por mes con el combo Paid Media.';}
+  else saveBadge.classList.remove('show');
+}
+opts.forEach(o=>o.addEventListener('click',()=>{o.classList.toggle('on');recalc();}));
+recalc();
+</script>
+</body>
+</html>
