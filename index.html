@@ -304,6 +304,20 @@
   .inc{display:flex;gap:13px;align-items:flex-start;font-size:.97rem}
   .inc .chk{width:24px;height:24px;border-radius:7px;background:#fff;color:var(--blue);display:grid;place-items:center;flex-shrink:0;font-size:.7rem;font-weight:800}
   .note{margin-top:26px;font-size:.85rem;opacity:.7;max-width:70ch;line-height:1.5}
+  /* combo banner */
+  .combo-banner{position:relative;z-index:2;margin-bottom:50px;background:#fff;border-radius:22px;padding:30px 36px;display:flex;align-items:center;justify-content:space-between;gap:26px;flex-wrap:wrap;box-shadow:0 24px 50px -22px rgba(0,0,0,.4);overflow:hidden}
+  .combo-banner::before{content:"";position:absolute;top:0;left:0;width:6px;height:100%;background:linear-gradient(180deg,var(--blue),#5563ff)}
+  .cb-left{flex:1;min-width:240px}
+  .cb-tag{display:inline-flex;align-items:center;gap:7px;font-size:.7rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);background:rgba(30,43,255,.1);padding:5px 11px;border-radius:99px;margin-bottom:12px}
+  .cb-tag::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--blue);animation:pulse 2s infinite}
+  .combo-banner h3{color:var(--green-900);font-size:1.5rem;margin-bottom:6px}
+  .cb-left p{color:var(--ink-soft);font-size:.95rem}
+  .cb-right{text-align:right}
+  .cb-old{font-family:'Bricolage Grotesque';font-weight:700;font-size:1.3rem;color:#9aa;text-decoration:line-through;text-decoration-color:var(--blue);opacity:.7;line-height:1}
+  .cb-new{font-family:'Bricolage Grotesque';font-weight:800;font-size:2.6rem;color:var(--blue);line-height:1.05}
+  .cb-new span{font-size:.85rem;font-weight:500;color:var(--ink-soft);font-family:'Hanken Grotesk'}
+  .cb-save{margin-top:8px;display:inline-block;background:var(--green-500);color:#fff;font-size:.82rem;font-weight:700;padding:6px 13px;border-radius:99px}
+  @media(max-width:600px){.combo-banner{padding:26px 24px}.cb-right{text-align:left}}
 
   /* PRICING / BUILDER */
   .pricing{background:var(--paper);color:var(--ink)}
@@ -345,6 +359,16 @@
   .sum-note{font-size:.78rem;opacity:.55;margin-top:16px;line-height:1.5}
   .save-badge{margin-top:18px;background:var(--green-500);color:#fff;border-radius:12px;padding:12px 16px;font-size:.85rem;font-weight:600;display:none;align-items:center;gap:10px;animation:fadeUp .4s var(--ease)}
   .save-badge.show{display:flex}
+  /* phases */
+  .phase{animation:fadeUp .35s var(--ease)}
+  .phase + .phase{border-top:1px dashed rgba(247,237,215,.18);padding-top:18px;margin-top:18px}
+  .phase-label{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--green-300);font-weight:700;margin-bottom:13px;display:flex;align-items:center;gap:8px}
+  .phase-label .badge{background:rgba(121,184,155,.16);padding:3px 8px;border-radius:6px;font-size:.62rem;letter-spacing:.06em}
+  .phase .sline{margin-bottom:9px}
+  .phase-sub{display:flex;justify-content:space-between;align-items:baseline;margin-top:13px;padding-top:13px;border-top:1px solid rgba(247,237,215,.12)}
+  .phase-sub .pl{font-size:.78rem;opacity:.7;text-transform:uppercase;letter-spacing:.08em}
+  .phase-sub .pv{font-family:'Bricolage Grotesque';font-weight:800;font-size:1.8rem;color:var(--cream);line-height:1}
+  .phase-sub .pv small{font-size:.72rem;opacity:.6;font-weight:500;font-family:'Hanken Grotesk'}
 
   /* PLAN */
   .plan{background:var(--green-900);color:var(--cream);text-align:center}
@@ -603,6 +627,19 @@
       </div>
     </div>
 
+    <div class="combo-banner reveal">
+      <div class="cb-left">
+        <span class="cb-tag">Promo · ambos servicios</span>
+        <h3>Meta Ads + Google Ads, juntos</h3>
+        <p>Todo tu Paid Media gestionado bajo una sola estrategia coordinada.</p>
+      </div>
+      <div class="cb-right">
+        <div class="cb-old">$380.000</div>
+        <div class="cb-new">$280.000 <span>ARS / mes</span></div>
+        <div class="cb-save">Ahorrás $100.000 / mes</div>
+      </div>
+    </div>
+
     <div class="includes reveal d1">
       <h3>Qué incluye el servicio Paid Media</h3>
       <div class="inc-grid">
@@ -667,18 +704,13 @@
       </div>
 
       <div class="summary reveal d1">
-        <h3>Tu plan mensual</h3>
+        <h3>Tu inversión</h3>
         <div class="ssub">Honorarios · ARS por mes</div>
-        <div class="sum-lines" id="sumlines">
+        <div id="sumbody">
           <div class="sum-empty">Seleccioná al menos un servicio…</div>
         </div>
-        <div class="sum-divider"></div>
-        <div class="sum-total">
-          <span class="tl">Total mensual</span>
-          <span class="tv" id="total">$0 <small>/mes</small></span>
-        </div>
         <div class="save-badge" id="savebadge">🎉 <span id="savetext"></span></div>
-        <p class="sum-note">El Setup corresponde a los primeros 2 meses de trabajo. Luego se continúa con el mantenimiento mensual. El consumo de tokens del bot se factura aparte según el volumen real de mensajes.</p>
+        <p class="sum-note" id="sumnote">El Setup corresponde a los primeros 2 meses de trabajo. Luego se continúa con el mantenimiento mensual. El consumo de tokens del bot se factura aparte según el volumen real de mensajes.</p>
       </div>
     </div>
   </div>
@@ -819,43 +851,76 @@ document.querySelectorAll('.ptab').forEach(t=>{
 
 /* ---------- pricing builder ---------- */
 const opts=document.querySelectorAll('.opt');
-const sumlines=document.getElementById('sumlines'),totalEl=document.getElementById('total');
+const sumbody=document.getElementById('sumbody'),sumnote=document.getElementById('sumnote');
 const saveBadge=document.getElementById('savebadge'),saveText=document.getElementById('savetext');
 const fmt=n=>'$'+n.toLocaleString('es-AR');
+const lineHTML=l=>`<div class="sline ${l.promo?'promo':''}"><span>${l.promo?'🔥 ':''}${l.name}</span><span>${fmt(l.price)}</span></div>`;
 
 function recalc(){
   const selected=[...opts].filter(o=>o.classList.contains('on'));
-  let total=0,lines=[],saved=0;
+  const hasSetup=selected.some(o=>o.dataset.id==='setup');
+  const hasManten=selected.some(o=>o.dataset.id==='manten');
   const hasMeta=selected.some(o=>o.dataset.id==='meta');
   const hasGoogle=selected.some(o=>o.dataset.id==='google');
   const combo=hasMeta&&hasGoogle;
 
-  selected.forEach(o=>{
-    const id=o.dataset.id,price=+o.dataset.price;
-    const name=o.querySelector('.o-name').childNodes[0].textContent.trim();
-    if(combo&&(id==='meta'||id==='google'))return; // handled as combo
-    total+=price;
-    lines.push({name,price});
-  });
-
+  // Paid Media: honorarios recurrentes que aplican en cualquier fase
+  let paidLines=[],paidTotal=0,saved=0;
   if(combo){
-    const comboPrice=280000;
-    const full=150000+230000;
-    saved=full-comboPrice;
-    total+=comboPrice;
-    lines.push({name:'Combo Meta + Google',price:comboPrice,promo:true});
-  }
-
-  // render
-  if(!selected.length){
-    sumlines.innerHTML='<div class="sum-empty">Seleccioná al menos un servicio…</div>';
+    paidLines.push({name:'Combo Meta + Google',price:280000,promo:true});
+    paidTotal=280000;saved=(150000+230000)-280000;
   }else{
-    sumlines.innerHTML=lines.map(l=>`<div class="sline ${l.promo?'promo':''}"><span>${l.promo?'🔥 ':''}${l.name}</span><span>${fmt(l.price)}</span></div>`).join('');
+    if(hasMeta){paidLines.push({name:'Meta Ads',price:150000});paidTotal+=150000;}
+    if(hasGoogle){paidLines.push({name:'Google Ads',price:230000});paidTotal+=230000;}
   }
-  totalEl.innerHTML=fmt(total)+' <small>/mes</small>';
 
+  if(!selected.length){
+    sumbody.innerHTML='<div class="sum-empty">Seleccioná al menos un servicio…</div>';
+    saveBadge.classList.remove('show');
+    sumnote.textContent='El Setup corresponde a los primeros 2 meses de trabajo. Luego se continúa con el mantenimiento mensual. El consumo de tokens del bot se factura aparte según el volumen real de mensajes.';
+    return;
+  }
+
+  // Construir fases en el tiempo (Setup y Mantenimiento NO se pagan en simultáneo)
+  const phases=[];
+  if(hasSetup){
+    phases.push({label:'Primeros 2 meses',badge:'Etapa 1',lines:[{name:'Setup del sistema',price:450000},...paidLines],total:450000+paidTotal});
+  }
+  if(hasManten){
+    phases.push({label:hasSetup?'A partir del mes 3':'Mensual',badge:'Etapa 2',lines:[{name:'Mantenimiento',price:150000},...paidLines],total:150000+paidTotal});
+  }
+  if(!hasSetup&&!hasManten){
+    phases.push({label:'Mensual',badge:'Paid Media',lines:paidLines,total:paidTotal});
+  }
+
+  // Render
+  if(phases.length===1){
+    const p=phases[0];
+    sumbody.innerHTML=
+      `<div class="sum-lines">${p.lines.map(lineHTML).join('')}</div>`+
+      `<div class="sum-divider"></div>`+
+      `<div class="sum-total"><span class="tl">Total mensual</span><span class="tv">${fmt(p.total)} <small>/mes</small></span></div>`;
+  }else{
+    sumbody.innerHTML=phases.map(p=>
+      `<div class="phase">`+
+        `<div class="phase-label">${p.label}<span class="badge">${p.badge}</span></div>`+
+        p.lines.map(lineHTML).join('')+
+        `<div class="phase-sub"><span class="pl">Total mensual</span><span class="pv">${fmt(p.total)} <small>/mes</small></span></div>`+
+      `</div>`
+    ).join('');
+  }
+
+  // Badge de ahorro por combo
   if(saved>0){saveBadge.classList.add('show');saveText.textContent='Ahorrás '+fmt(saved)+' por mes con el combo Paid Media.';}
   else saveBadge.classList.remove('show');
+
+  // Nota contextual
+  let notes=[];
+  if(hasSetup&&hasManten) notes.push('Durante los primeros 2 meses se abona el Setup; recién a partir del mes 3 se continúa con el mantenimiento mensual. No se pagan en simultáneo.');
+  else if(hasSetup) notes.push('El Setup corresponde a los primeros 2 meses de trabajo; luego se continúa con el mantenimiento mensual.');
+  if(hasManten) notes.push('El consumo de tokens del bot se factura aparte según el volumen real de mensajes.');
+  if(hasMeta||hasGoogle) notes.push('Los honorarios de Paid Media no incluyen la inversión en cada plataforma (presupuesto que sugeriremos según objetivos).');
+  sumnote.textContent=notes.join(' ');
 }
 opts.forEach(o=>o.addEventListener('click',()=>{o.classList.toggle('on');recalc();}));
 recalc();
