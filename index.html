@@ -215,8 +215,8 @@
   .ptab.active{background:var(--green-800);border-color:var(--green-800);transform:translateY(-4px);box-shadow:var(--shadow)}
   .ptab.active .pt-name{color:var(--cream)}
   .ptab.active .pt-k{color:var(--green-300);opacity:1}
-  .ptab[data-p="bot"].active{background:var(--purple);border-color:var(--purple)}
-  .ptab[data-p="bot"].active .pt-k{color:#d9c9f5}
+  .ptab[data-p="bot"].active{background:var(--green-800);border-color:var(--green-800)}
+  .ptab[data-p="bot"].active .pt-k{color:var(--green-300)}
   .pillar-panel{
     background:#fff;border-radius:26px;border:1px solid rgba(12,47,35,.08);overflow:hidden;
     display:grid;grid-template-columns:1fr 1fr;min-height:380px;box-shadow:var(--shadow);
@@ -253,7 +253,7 @@
   .chat-mock{width:100%;max-width:280px;background:#fff;border-radius:16px;padding:16px;box-shadow:0 20px 40px -18px rgba(0,0,0,.5);display:flex;flex-direction:column;gap:10px}
   .bub{max-width:80%;padding:10px 14px;border-radius:14px;font-size:.82rem;line-height:1.3}
   .bub.in{background:#EEF0F4;color:#223;border-bottom-left-radius:4px;align-self:flex-start}
-  .bub.out{background:var(--purple);color:#fff;border-bottom-right-radius:4px;align-self:flex-end}
+  .bub.out{background:var(--green-700);color:#fff;border-bottom-right-radius:4px;align-self:flex-end}
   .typing{align-self:flex-start;display:flex;gap:4px;padding:10px 14px;background:#EEF0F4;border-radius:14px}
   .typing i{width:6px;height:6px;border-radius:50%;background:#9aa;animation:typing 1.2s infinite}
   .typing i:nth-child(2){animation-delay:.2s}.typing i:nth-child(3){animation-delay:.4s}
@@ -837,7 +837,7 @@ function renderPillar(key){
       <ul>${p.benefits.map(b=>`<li><span class="b">✓</span> ${b}</li>`).join('')}</ul>
     </div>
     <div class="pp-right panel-fade">${p.mock}</div>`;
-  if(key==='bot'){panel.querySelector('.pp-right').style.background='#2a1f3d';}
+  if(key==='bot'){panel.querySelector('.pp-right').style.background='var(--green-900)';}
   else{panel.querySelector('.pp-right').style.background='var(--green-900)';}
 }
 renderPillar('crm');
